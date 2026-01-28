@@ -1,0 +1,15 @@
+# Data Manipulation
+pandas
+numpy
+
+# Machine Learning
+scikit-learn
+
+# Natural Language Processing
+nltk
+
+# Web Server (Required for Render Deployment)
+gunicorn
+
+# Optional: Framework (Add the one you are using)
+flask  

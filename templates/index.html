@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Recommendation</title>
+</head>
+<body>
+
+<h2>User Recommendation System</h2>
+
+<input type="text" id="user" placeholder="Enter username">
+<button onclick="getRecommendations()">Recommend</button>
+
+<ul id="results"></ul>
+
+<script>
+function getRecommendations() {
+    const user = document.getElementById("user").value;
+
+    fetch(`/recommend?user=${user}`)
+        .then(res => res.json())
+        .then(data => {
+            const list = document.getElementById("results");
+            list.innerHTML = "";
+
+            data.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        })
+        .catch(err => console.error(err));
+}
+</script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@ import pandas as pd
 rating_pivot = pickle.load(open("rating_pivot.pkl", "rb"))
 item_similarity_df = pickle.load(open("item_similarity.pkl", "rb"))
 df = pickle.load(open("reviews_df.pkl", "rb"))
-lr = pickle.load(open("sentiment_model.pkl", "rb"))
+rf = pickle.load(open("sentiment_model.pkl", "rb"))
 tfidf = pickle.load(open("tfidf.pkl", "rb"))
 
 def recommend_item_based(user, n=20):
@@ -22,7 +22,7 @@ def recommend_item_based(user, n=20):
             if user_ratings[sim_item] == 0:
                 scores[sim_item] = scores.get(sim_item, 0) + sim * rating
 
-    #scores = {"fruit":4.2 ,"apple":3,"banana":3,"cucumber":5,"maize":3,"pede":4.4}
+    
     return (
         pd.Series(scores)
         .sort_values(ascending=False)
@@ -37,7 +37,7 @@ def get_sentiment_score(product):
     if reviews.empty:
         return 0.0
 
-    probs = lr.predict_proba(tfidf.transform(reviews))
+    probs = rf.predict_proba(tfidf.transform(reviews))
 
     # Case 1: binary probabilities [p_neg, p_pos]
     if probs.ndim == 2:
