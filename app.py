@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify ,render_template
-from model.model_prediction import recommend_item_based ,get_sentiment_score
+from models.model_prediction import recommend_item_based ,get_sentiment_score
 import pandas as pd
 
 app = Flask(__name__)
